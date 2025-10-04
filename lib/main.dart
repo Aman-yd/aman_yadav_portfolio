@@ -370,7 +370,7 @@ class Footer extends StatelessWidget {
       color: Colors.grey[200],
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: Center(
-        child: Text('© 2025 Aman Yadav • All Rights Reserved',
+        child: Text('© 2025 Aman Yadav • All Rights Reserved.',
             style: TextStyle(color: Colors.grey[700])),
       ),
     );
