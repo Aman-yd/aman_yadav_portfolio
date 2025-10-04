@@ -11,7 +11,7 @@ class PortfolioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Your Name • Flutter Developer',
+      title: 'Aman Yadav • Sr. Mobile App Developer',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
@@ -30,9 +30,8 @@ class PortfolioHome extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height,
-          ),
+          constraints:
+              BoxConstraints(minHeight: MediaQuery.of(context).size.height),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: const [
@@ -40,9 +39,11 @@ class PortfolioHome extends StatelessWidget {
               SizedBox(height: 40),
               AboutSection(),
               SizedBox(height: 40),
+              ExperienceSection(),
+              SizedBox(height: 40),
               ProjectsSection(),
               SizedBox(height: 40),
-              TestimonialsSection(),
+              SkillsSection(),
               SizedBox(height: 40),
               ContactSection(),
               SizedBox(height: 80),
@@ -60,104 +61,34 @@ class HeroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final isNarrow = width < 800;
-
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 24),
       color: Theme.of(context).colorScheme.primary.withOpacity(0.06),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: isNarrow
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    HeroText(),
-                    SizedBox(height: 24),
-                    HeroActions()
-                  ],
-                )
-              : Row(
-                  children: const [
-                    Expanded(child: HeroText()),
-                    SizedBox(width: 24),
-                    HeroActions()
-                  ],
-                ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Aman Yadav',
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall
+                      ?.copyWith(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
+              Text('Sr. Mobile App Developer (Team Leader)',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(color: Colors.grey[700])),
+              const SizedBox(height: 16),
+              Text(
+                  'Hello! I am a Sr. Mobile App Developer with 5+ years of experience in Flutter, Android (Java), React Native, and Git. I specialize in building scalable mobile apps, integrating REST APIs, and leading development teams.',
+                  style: Theme.of(context).textTheme.bodyLarge),
+            ],
+          ),
         ),
       ),
-    );
-  }
-}
-
-class HeroText extends StatelessWidget {
-  const HeroText({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Your Name',
-            style: Theme.of(context)
-                .textTheme
-                .displaySmall
-                ?.copyWith(fontWeight: FontWeight.bold)),
-        const SizedBox(height: 8),
-        Text('Flutter & Android Developer',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(color: Colors.grey[700])),
-        const SizedBox(height: 16),
-        Text(
-          'I build high-quality cross-platform mobile apps. I take features end-to-end—from UI/UX to backend integration—focusing on clean, scalable code and excellent user experience.',
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-      ],
-    );
-  }
-}
-
-class HeroActions extends StatelessWidget {
-  const HeroActions({Key? key}) : super(key: key);
-
-  Future<void> _launchEmail() async {
-    final uri = Uri(
-      scheme: 'mailto',
-      path: 'youremail@example.com',
-      queryParameters: {'subject': 'Project inquiry'},
-    );
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        ElevatedButton(
-          onPressed: _launchEmail,
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
-            child: Text('Hire Me'),
-          ),
-        ),
-        const SizedBox(height: 12),
-        OutlinedButton(
-          onPressed: () {
-            // link to GitHub or resume
-            launchUrl(Uri.parse('https://github.com/yourusername'));
-          },
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
-            child: Text('View Code / Resume'),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -179,20 +110,8 @@ class AboutSection extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 12),
               Text(
-                'I am an experienced Flutter and Android developer with a strong background in building production apps. I specialize in designing responsive UI, integrating RESTful APIs and Firebase services, and improving app performance and architecture. I enjoy solving challenging problems and delivering apps that users love.',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              const SizedBox(height: 18),
-              Wrap(spacing: 12, runSpacing: 8, children: const [
-                SkillChip('Flutter'),
-                SkillChip('Dart'),
-                SkillChip('Kotlin'),
-                SkillChip('Firebase'),
-                SkillChip('REST APIs'),
-                SkillChip('Stripe / Payments'),
-                SkillChip('State Management'),
-                SkillChip('CI / CD'),
-              ])
+                  'Experienced in building production apps for Android and iOS using Flutter and native technologies. Skilled in UI/UX, backend integration, performance optimization, and team leadership.',
+                  style: Theme.of(context).textTheme.bodyLarge),
             ],
           ),
         ),
@@ -201,13 +120,83 @@ class AboutSection extends StatelessWidget {
   }
 }
 
-class SkillChip extends StatelessWidget {
-  final String label;
-  const SkillChip(this.label, {Key? key}) : super(key: key);
+class ExperienceSection extends StatelessWidget {
+  const ExperienceSection({Key? key}) : super(key: key);
+
+  static final List<Map<String, String>> experiences = [
+    {
+      'role': 'Sr. Mobile Application Developer (Team Leader)',
+      'company': 'Point Matrix IT Services',
+      'location': 'Nashik, MH',
+      'duration': 'Jan 2022 – Current',
+      'description':
+          'Writing clean and efficient codes for Android and Hybrid Technology, managing production mobile apps with REST API integrations.'
+    },
+    {
+      'role': 'Sr. Android Developer',
+      'company': 'Limbic Technology',
+      'location': 'Bhopal, MP',
+      'duration': 'May 2020 – Jan 2022',
+      'description':
+          'Developed Android apps, monitored performance, optimized code, fixed bugs, and managed production mobile apps.'
+    },
+    {
+      'role': 'Android Developer Intern',
+      'company': 'ADSPL Tech',
+      'location': 'Gwalior, MP',
+      'duration': 'Nov 2019 – May 2020',
+      'description':
+          'Worked on native applications interacting with IoT devices.'
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Chip(label: Text(label));
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Work Experience',
+              style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 160,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: experiences.length,
+              itemBuilder: (context, index) {
+                final e = experiences[index];
+                return Container(
+                  width: 400,
+                  margin: const EdgeInsets.only(right: 12),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(e['role'] ?? '',
+                              style: Theme.of(context).textTheme.titleMedium),
+                          Text(
+                              '${e['company']} | ${e['location']} | ${e['duration']}',
+                              style: TextStyle(
+                                  color: Colors.grey[700], fontSize: 12)),
+                          const SizedBox(height: 4),
+                          Text(e['description'] ?? '',
+                              style: TextStyle(fontSize: 12)),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -216,22 +205,35 @@ class ProjectsSection extends StatelessWidget {
 
   static final List<Map<String, String>> projects = [
     {
-      'title': 'Project One',
+      'title': 'Taxi Driver App (ITC Abu Dhabi UAE)',
+      'duration': 'Aug 2023 – Nov 2023',
+      'tech': 'Android, Java',
       'description':
-          'An e-commerce app with Flutter, Firebase, and Stripe integration.',
-      'link': 'https://play.google.com/store/apps/details?id=example1'
+          'Self-service app for hire car drivers with Socket API and tracking.'
     },
     {
-      'title': 'Project Two',
-      'description':
-          'A booking app with real-time updates and offline support.',
-      'link': 'https://github.com/yourusername/project-two'
+      'title': 'POS iMenu360',
+      'duration': 'Dec 2022 – Current',
+      'tech': 'Flutter, Firebase, Thermal Printing',
+      'description': 'Restaurant solution app.'
     },
     {
-      'title': 'Project Three',
-      'description':
-          'A POS integration app for hardware peripherals using Bluetooth.',
-      'link': 'https://github.com/yourusername/project-three'
+      'title': 'Unyte',
+      'duration': 'Jan 2023 – Current',
+      'tech': 'Flutter, Firebase',
+      'description': 'Investment application.'
+    },
+    {
+      'title': 'WhyBuy',
+      'duration': 'Aug 2022 – Dec 2022',
+      'tech': 'Android, Java, Firebase',
+      'description': 'Ecommerce app with RazorPay integration.'
+    },
+    {
+      'title': 'My Live Location',
+      'duration': 'Jan 2022 – Aug 2022',
+      'tech': 'Android, Firebase',
+      'description': 'Location sharing, chat & video call.'
     },
   ];
 
@@ -239,146 +241,86 @@ class ProjectsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Selected Work',
-                  style: Theme.of(context).textTheme.headlineSmall),
-              const SizedBox(height: 12),
-              Wrap(
-                  spacing: 16,
-                  runSpacing: 16,
-                  children: projects.map((p) => ProjectCard(p)).toList())
-            ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Projects', style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: projects.length,
+              itemBuilder: (context, index) {
+                final p = projects[index];
+                return Container(
+                  width: 300,
+                  margin: const EdgeInsets.only(right: 12),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(p['title'] ?? '',
+                              style: Theme.of(context).textTheme.titleMedium),
+                          Text('${p['duration']} | ${p['tech']}',
+                              style: TextStyle(
+                                  color: Colors.grey[700], fontSize: 12)),
+                          const SizedBox(height: 4),
+                          Text(p['description'] ?? '',
+                              style: TextStyle(fontSize: 12)),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
 }
 
-class ProjectCard extends StatelessWidget {
-  final Map<String, String> project;
-  const ProjectCard(this.project, {Key? key}) : super(key: key);
+class SkillsSection extends StatelessWidget {
+  const SkillsSection({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 340,
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(project['title'] ?? '',
-                  style: Theme.of(context).textTheme.titleMedium),
-              const SizedBox(height: 8),
-              Text(project['description'] ?? ''),
-              const SizedBox(height: 12),
-              TextButton(
-                onPressed: () => launchUrl(Uri.parse(project['link'] ?? '')),
-                child: const Text('View'),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class TestimonialsSection extends StatelessWidget {
-  const TestimonialsSection({Key? key}) : super(key: key);
-
-  static final List<Map<String, String>> testimonials = [
-    {
-      'text': 'Great developer — delivered on time and with excellent quality.',
-      'name': 'Client A',
-      'role': 'Product Manager'
-    },
-    {
-      'text':
-          'Very professional and communicates clearly. Strong attention to detail.',
-      'name': 'Client B',
-      'role': 'CTO'
-    }
+  static const skills = [
+    'Flutter',
+    'Android',
+    'Java',
+    'Git',
+    'DSA',
+    'MySQL',
+    'React Native'
   ];
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Testimonials',
-                  style: Theme.of(context).textTheme.headlineSmall),
-              const SizedBox(height: 12),
-              Column(
-                  children:
-                      testimonials.map((t) => TestimonialCard(t)).toList())
-            ],
-          ),
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Skills', style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 12),
+          Wrap(
+              spacing: 12,
+              runSpacing: 8,
+              children: skills.map((s) => Chip(label: Text(s))).toList())
+        ],
       ),
     );
   }
 }
 
-class TestimonialCard extends StatelessWidget {
-  final Map<String, String> t;
-  const TestimonialCard(this.t, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('"${t['text']}"'),
-            const SizedBox(height: 8),
-            Text('- ${t['name']}, ${t['role']}',
-                style: TextStyle(color: Colors.grey[700])),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ContactSection extends StatefulWidget {
+class ContactSection extends StatelessWidget {
   const ContactSection({Key? key}) : super(key: key);
 
-  @override
-  State<ContactSection> createState() => _ContactSectionState();
-}
-
-class _ContactSectionState extends State<ContactSection> {
-  final _formKey = GlobalKey<FormState>();
-  final _name = TextEditingController();
-  final _email = TextEditingController();
-  final _message = TextEditingController();
-
-  Future<void> _sendMail() async {
-    final subject = Uri.encodeComponent('Portfolio inquiry from ${_name.text}');
-    final body = Uri.encodeComponent(
-        'Name: ${_name.text}\nEmail: ${_email.text}\n\n${_message.text}');
-    final uri =
-        Uri.parse('mailto:youremail@example.com?subject=$subject&body=$body');
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
-  }
+  final String email = 'abyadav113@gmail.com';
+  final String phone = '+91(721)8144612';
 
   @override
   Widget build(BuildContext context) {
@@ -386,48 +328,31 @@ class _ContactSectionState extends State<ContactSection> {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 700),
+          constraints: const BoxConstraints(maxWidth: 1100),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Contact', style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 12),
-              Form(
-                key: _formKey,
-                child: Column(children: [
-                  TextFormField(
-                      controller: _name,
-                      decoration: const InputDecoration(labelText: 'Name'),
-                      validator: (v) =>
-                          v == null || v.isEmpty ? 'Enter name' : null),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                      controller: _email,
-                      decoration: const InputDecoration(labelText: 'Email'),
-                      validator: (v) =>
-                          v == null || v.isEmpty ? 'Enter email' : null),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                      controller: _message,
-                      decoration: const InputDecoration(labelText: 'Message'),
-                      maxLines: 5,
-                      validator: (v) =>
-                          v == null || v.isEmpty ? 'Enter message' : null),
-                  const SizedBox(height: 12),
-                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          _sendMail();
-                        }
-                      },
-                      child: const Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 20.0),
-                          child: Text('Send')),
-                    )
-                  ])
-                ]),
+              Text(
+                  'I am available for freelance or full-time opportunities. Feel free to reach out via email or phone.',
+                  style: Theme.of(context).textTheme.bodyLarge),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  ElevatedButton.icon(
+                    icon: const Icon(Icons.email),
+                    label: const Text('Email'),
+                    onPressed: () =>
+                        launchUrl(Uri(scheme: 'mailto', path: email)),
+                  ),
+                  const SizedBox(width: 12),
+                  ElevatedButton.icon(
+                    icon: const Icon(Icons.phone),
+                    label: const Text('Call'),
+                    onPressed: () => launchUrl(Uri(scheme: 'tel', path: phone)),
+                  ),
+                ],
               )
             ],
           ),
@@ -443,28 +368,11 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
-      color: Theme.of(context).colorScheme.primary.withOpacity(0.04),
+      color: Colors.grey[200],
+      padding: const EdgeInsets.symmetric(vertical: 24),
       child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('© ${DateTime.now().year} Your Name'),
-              Row(children: [
-                IconButton(
-                    onPressed: () =>
-                        launchUrl(Uri.parse('https://github.com/yourusername')),
-                    icon: const Icon(Icons.code)),
-                IconButton(
-                    onPressed: () => launchUrl(
-                        Uri.parse('https://www.linkedin.com/in/yourusername')),
-                    icon: const Icon(Icons.link)),
-              ])
-            ],
-          ),
-        ),
+        child: Text('© 2025 Aman Yadav • All Rights Reserved',
+            style: TextStyle(color: Colors.grey[700])),
       ),
     );
   }
