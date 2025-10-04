@@ -348,7 +348,7 @@ class ContactSection extends StatelessWidget {
                   const SizedBox(width: 12),
                   ElevatedButton.icon(
                     icon: const Icon(Icons.phone),
-                    label: const Text('Call'),
+                    label: const Text('Call (7218144612)'),
                     onPressed: () => launchUrl(Uri(scheme: 'tel', path: phone)),
                   ),
                 ],
